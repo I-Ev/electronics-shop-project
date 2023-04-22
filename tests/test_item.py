@@ -13,3 +13,18 @@ def test_calculate_total_price():
 def test_apply_discount():
     item1.apply_discount()
     assert item1.price == 5000
+
+
+def test_name_getter():
+    assert item1.name == 'Смартфон'
+
+
+def test_name_setter():
+    item1.name = 'Tesla'
+    assert item1.name == 'Tesla'
+    item1.name = 'TERRRRRRRRRRRRRRRRRRRRRR'
+    assert item1.name == 'Tesla'
+
+def test_strint_to_number():
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
