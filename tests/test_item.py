@@ -25,6 +25,17 @@ def test_name_setter():
     item1.name = 'TERRRRRRRRRRRRRRRRRRRRRR'
     assert item1.name == 'Tesla'
 
+
 def test_strint_to_number():
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_repr_class():
+    n1 = Item('Телефон', 60000, 5)
+    assert repr(n1) == "Item('Телефон', 60000, 5)"
+
+
+def test_str_class():
+    m1 = Item('Телефон', 60000, 5)
+    assert str(m1) == 'Телефон'
