@@ -1,6 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 
 from src.item import Item
+from src.phone import Phone
+import pytest
 
 item1 = Item("Смартфон", 10000, 20)
 item1.pay_rate = 0.5
@@ -39,3 +41,13 @@ def test_repr_class():
 def test_str_class():
     m1 = Item('Телефон', 60000, 5)
     assert str(m1) == 'Телефон'
+
+
+def test_add():
+    m1 = Item('Телефон', 60000, 5)
+    phone1 = Phone("Смартфон", 10000, 20, 6)
+    assert (phone1 + m1) == 25
+    with pytest.raises(Exception):
+        m1 + 500
+    with pytest.raises(Exception):
+        phone1 + 500
