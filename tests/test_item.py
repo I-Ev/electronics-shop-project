@@ -47,7 +47,7 @@ def test_add():
     m1 = Item('Телефон', 60000, 5)
     phone1 = Phone("Смартфон", 10000, 20, 6)
     assert (phone1 + m1) == 25
-    with pytest.raises(Exception):
+    with pytest.raises(TypeError):
         m1 + 500
-    with pytest.raises(Exception):
+    with pytest.raises(TypeError):
         phone1 + 500
