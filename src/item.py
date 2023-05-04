@@ -38,7 +38,7 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         item_list = []
-        with open('C:\PythonProjects\HoweWorks\electronics-shop-project\src\items.csv', newline='') as csvfile:
+        with open(r'C:\PythonProjects\HoweWorks\electronics-shop-project\src\items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row['name']
@@ -66,6 +66,6 @@ class Item:
         self.price *= self.pay_rate
 
     def __add__(self, other):
-        if issubclass(other.__class__, self.__class__):
+        if isinstance(other, Item):
             return self.quantity + other.quantity
-        raise Exception
+        raise TypeError
