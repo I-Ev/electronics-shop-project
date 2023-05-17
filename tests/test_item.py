@@ -51,3 +51,12 @@ def test_add():
         m1 + 500
     with pytest.raises(TypeError):
         phone1 + 500
+
+# def test_instantiate_from_csv():
+# name,price,quantity
+# Смартфон,100,1
+# Ноутбук,1000,3
+# Кабель,10,5
+# Мышка,50,5
+# Клавиатура,75,5
+
