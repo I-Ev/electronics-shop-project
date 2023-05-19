@@ -1,4 +1,5 @@
 import csv
+from src.exception_class import InstantiateCSVError
 
 
 class Item:
@@ -38,14 +39,22 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         item_list = []
-        with open(r'C:\PythonProjects\HoweWorks\electronics-shop-project\src\items.csv', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                name = row['name']
-                price = float(row['price'])
-                quantity = int(row['quantity'])
-                item_list.append(Item(name, price, quantity))
-        cls.all = item_list
+        csv_file_path = r'C:\PythonProjects\HoweWorks\electronics-shop-project\src\items.csv'
+        try:
+            with open(csv_file_path, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                if check_csvfile(csv_file_path):
+                    for row in reader:
+                        name = row['name']
+                        price = float(row['price'])
+                        quantity = int(row['quantity'])
+                        item_list.append(Item(name, price, quantity))
+                else:
+                    raise InstantiateCSVError("Файл item.csv поврежден")
+                cls.all = item_list
+        except FileNotFoundError:
+            print('Отсутствует файл item.csv')
+
 
     @staticmethod
     def string_to_number(string):
@@ -69,3 +78,14 @@ class Item:
         if isinstance(other, Item):
             return self.quantity + other.quantity
         raise TypeError
+
+def check_csvfile(file_path):
+    """ Возвращает True если в csv файле 3 столбца, иначе False """
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file)
+        headers = next(reader)  # Получаем заголовки
+        if len(headers) == 3:  # Проверяем длину заголовков
+            for row in reader: # Проходимся уже по строкам данных
+                if len(row) == 3:
+                    return True
+    return False

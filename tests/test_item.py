@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
-from src.item import Item
+from src.exception_class import InstantiateCSVError
+from src.item import Item, check_csvfile
 from src.phone import Phone
 import pytest
 
@@ -51,3 +51,11 @@ def test_add():
         m1 + 500
     with pytest.raises(TypeError):
         phone1 + 500
+
+def test_check_csvfile_invalid():
+    file_path = "tests/test_csv/invalid_items.csv"
+    assert check_csvfile(file_path) == False
+
+def test_check_csvfile_valid():
+    file_path = "tests/test_csv/invalid_items.csv"
+    assert check_csvfile(file_path) == False
